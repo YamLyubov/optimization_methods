@@ -2,23 +2,23 @@ package ru.spbu.apmath.optmeth.lyubovyamshchikova;
 
 public class CoordDiscent {
 
-    public Vector findMin(Rosenbrock rosFun){
+    public Vector findMin(BiFunction fun){
         Vector vect = new Vector(20,0);
         Vector e1 = new Vector(1,0);
         Vector e2 = new Vector(0, 1);
         double eps = 0.1;
         int k = 0;
-        while ((rosFun.getDer(vect).length()>eps) && k<500)  {
+        while ((fun.getDer(vect).length()>eps) && k<500)  {
             double alpha = 0.5;
             for (int i = 0; i < 20; i++) {
                // System.out.println("Оптимизация по x");
-                if (rosFun.getValue(vect.sub(e1.mul(alpha))) < rosFun.getValue(vect)) {
+                if (fun.getValue(vect.sub(e1.mul(alpha))) < fun.getValue(vect)) {
                     vect = vect.sub(e1.mul(alpha));
 //                    System.out.println("Вычли " + e1.mul(alpha) + " Получили " + vect.coord());
 //                    System.out.println("Получилось. Было: " + rosFun.getValue(vect) + " Стало: " + rosFun.getValue(vect.sub(e1.mul(alpha))) );
                 } else {
                    // System.out.println("Не получилось. Было: " + rosFun.getValue(vect) + " Стало: " + rosFun.getValue(vect.sub(e1.mul(alpha))) );
-                    if (rosFun.getValue(vect.add(e1.mul(alpha))) < rosFun.getValue(vect)) {
+                    if (fun.getValue(vect.add(e1.mul(alpha))) < fun.getValue(vect)) {
                         vect = vect.add(e1.mul(alpha));
                    //     System.out.println("Прибавили " + e1.mul(alpha).coord() + " Получили " + vect.coord());
                     } else {
@@ -31,11 +31,11 @@ public class CoordDiscent {
             alpha = 0.5;
           //  System.out.println("Оптимизация по y");
             for (int i = 0; i < 20; i++) {
-                if (rosFun.getValue(vect.sub(e2.mul(alpha))) < rosFun.getValue(vect)) {
+                if (fun.getValue(vect.sub(e2.mul(alpha))) < fun.getValue(vect)) {
                     vect = vect.sub(e2.mul(alpha));
                  //   System.out.println("Вычли " + e2.mul(alpha).coord() + " Получили " + vect.coord());
                 } else {
-                    if (rosFun.getValue(vect.add(e2.mul(alpha))) < rosFun.getValue(vect)) {
+                    if (fun.getValue(vect.add(e2.mul(alpha))) < fun.getValue(vect)) {
                         vect = vect.add(e2.mul(alpha));
                        // System.out.println("Прибавили " + e2.mul(alpha).coord() + " Получили " + vect.coord());
                     } else {

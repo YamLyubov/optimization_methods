@@ -35,9 +35,13 @@ public class Interaction {
             GradientDescent gd = new GradientDescent();
             System.out.println("Точка минимума Розенброк (наискор. спуск): " + gd.findMin(new Vector(0,0),ros).coord());
             System.out.println("Точка минимума Химмельблау (наискор. спуск): " + gd.findMin(new Vector(0,0), him).coord());
+            CoordDiscent cd = new CoordDiscent();
+            System.out.println("Точка минимума Розенброк (покоорд. спуск): " + cd.findMin(ros).coord());
+            System.out.println("Точка минимума Химмельблау (покоорд. спуск): " + cd.findMin(him).coord());
             QuasiNewton qn = new QuasiNewton();
             System.out.println("Точка минимума Розенброк (Квази-Ньютоновскй): " + qn.findMin(new Vector(1,0),ros).coord());
             System.out.println("Точка минимума Химмельблау (Квази-Ньютоновскй): " + qn.findMin(new Vector(2,1), him).coord());
+
     }
 
 }
